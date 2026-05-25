@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central de Rotas</title>
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Painel esquerdo flutuante -->
+  <aside class="fleet-panel" aria-label="Lista de veiculos">
+    <header class="brand-strip">
+      <div>
+        <p class="eyebrow">CorelliLog</p>
+        <h1>Central de Rotas</h1>
+      </div>
+      <a href="/chat.html" class="nav-switch-btn" title="Abrir Despacho IA">🚛 Despacho IA</a>
+      <span class="live-chip" id="liveChip">
+        <span class="pulse"></span>
+        Auto
+      </span>
+    </header>
+
+    <section class="signal-board" aria-label="Resumo da frota">
+      <article class="metric">
+        <span>Total</span>
+        <strong id="totalCount">0</strong>
+      </article>
+      <article class="metric good">
+        <span>Confiaveis</span>
+        <strong id="goodCount">0</strong>
+      </article>
+      <article class="metric warning">
+        <span>Atencao</span>
+        <strong id="attentionCount">0</strong>
+      </article>
+    </section>
+
+    <div class="toolbar">
+      <label class="search-box">
+        <i data-lucide="search"></i>
+        <input id="searchInput" type="search" placeholder="Buscar placa ou veiculo" autocomplete="off" />
+      </label>
+      <button class="icon-button" id="fitButton" type="button" title="Centralizar frota" aria-label="Centralizar frota">
+        <i data-lucide="scan"></i>
+      </button>
+    </div>
+
+    <div class="status-tabs" role="tablist" aria-label="Filtro de status">
+      <button class="tab active" data-filter="all"       type="button">Todos</button>
+      <button class="tab"        data-filter="live"      type="button">Ao vivo</button>
+      <button class="tab"        data-filter="attention" type="button">Atencao</button>
+      <button class="tab"        data-filter="old"       type="button">Antigos</button>
+    </div>
+
+    <section class="fleet-list" id="fleetList" aria-live="polite"></section>
+  </aside>
+
+  <!-- Barra superior flutuante -->
+  <div class="map-topbar">
+    <div>
+      <p class="eyebrow">Atualizacao automatica</p>
+      <h2 id="mapTitle">Todos os veiculos</h2>
+    </div>
+    <div class="refresh-panel">
+      <span id="sourceStatus">Carregando CSV...</span>
+      <strong id="refreshCountdown">30s</strong>
+    </div>
+  </div>
+
+  <!-- Painel direito flutuante -->
+  <section class="detail-drawer" id="detailDrawer" aria-live="polite">
+    <div class="empty-detail">
+      <i data-lucide="mouse-pointer-2"></i>
+      <span>Selecione um veiculo</span>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
